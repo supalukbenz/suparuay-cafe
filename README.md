@@ -70,6 +70,7 @@ If input 2, the program will display the dessert items that are available in the
 
 If you are in the order types. You can input the command B to end the order and show all orders for payment. or if you are in the main menu you can input B or Q(if has order).
 And the program will send a list of all coffee orders with the recipe to the barista.
+
 <img width="411" alt="Screen Shot 2562-05-26 at 18 43 32" src="https://user-images.githubusercontent.com/32286346/58381366-84479480-7fe6-11e9-9258-f8bae635cead.png">
 
 
