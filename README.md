@@ -52,7 +52,7 @@ Supalruay-Cafe is a simple simulation program of coffee shops that uses 3 main d
 
 First, You have to run the appplcaition in ...(Your directory).../suparuay-cafe/src/main/java/app/App.java
 
-When starting the program, you can select an order by inputting the command.
+When starting the program, the program shows Main Menu that you can select an order by inputting the command.
 <img width="353" alt="Screen Shot 2562-05-26 at 18 16 03" src="https://user-images.githubusercontent.com/32286346/58381162-37fb5500-7fe4-11e9-8e7a-cf2a09e9d314.png">
 
 If input 1, the program will display the coffee items that are available in the shop for you to choose by entering the command.
@@ -64,7 +64,8 @@ In some coffee items, when selected, you can choose topping more.
 <img width="391" alt="Screen Shot 2562-05-26 at 18 44 22" src="https://user-images.githubusercontent.com/32286346/58381349-6aa64d00-7fe6-11e9-99d9-1f76e243a596.png">
 
 
-If input 2, the program will display the dessert items that are available in the shop for you to choose by entering the command. If the item is out of stock the program will show that it is out of stock instead of displaying the dessert name.
+In the main menu, if input 2, the program will display the dessert items that are available in the shop for you to choose by entering the command. If the item is out of stock the program will show that it is out of stock instead of displaying the dessert name.
+
 <img width="411" alt="Screen Shot 2562-05-26 at 18 31 18" src="https://user-images.githubusercontent.com/32286346/58381213-8dcffd00-7fe4-11e9-8033-b83936ac74d4.png">
 
 
