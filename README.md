@@ -44,6 +44,7 @@ When starting the program, you can select an order by inputting the command.
 <img width="353" alt="Screen Shot 2562-05-26 at 18 16 03" src="https://user-images.githubusercontent.com/32286346/58381162-37fb5500-7fe4-11e9-8e7a-cf2a09e9d314.png">
 
 If input 1, the program will display the coffee items that are available in the shop for you to choose by entering the command.
+
 <img width="400" alt="Screen Shot 2562-05-26 at 18 16 21" src="https://user-images.githubusercontent.com/32286346/58381212-8872b280-7fe4-11e9-9972-077e2520508f.png">
 
 
