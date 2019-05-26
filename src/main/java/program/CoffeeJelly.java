@@ -17,6 +17,6 @@ public class CoffeeJelly implements Topping {
     }
 
     public String getDescription() {
-        return "+ add topping Chocolate Chip";
+        return "+ add topping Coffee Jelly";
     }
 }

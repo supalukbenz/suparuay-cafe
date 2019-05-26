@@ -16,32 +16,42 @@ public class App {
     public static void main(String[] args) {
         System.out.println();
         System.out.println("\n\t\t\tWelcome to Suparuay Cafe\n");
-        while (!exit.matches("[eE]")){
+        while (!exit.matches("[xX]")){
+            if(isBill(enter)) {
+                exit = "x";
+                return;
+            }
             mainMenu();
         }
         if(orders != null) {
-
+            System.out.println("\t\t\t\t\tTotal Order");
+            bill();
         }
-        bill();
+        System.out.println("\n\t\t\t\tThank you.\n");
 
     }
 
     public static void mainMenu() {
+        System.out.println("\n[Menu]");
         System.out.println("---------------------------------------------");
         System.out.printf("|\t%s\t\t|\n", "Enter the command of order type.");
         System.out.printf("| %-12s %-25s\t|\n", "Command", "Order");
         System.out.printf("| %-10s %-25s\t\t|\n", "1", "Coffee");
         System.out.printf("| %-10s %-25s\t\t|\n", "2", "Dessert");
-        System.out.printf("| %-10s %-25s\t\t|\n", "B", "End of order and get Bill");
-        System.out.printf("| %-10s %-25s\t\t|\n", "Q", "Exit from Suparuay cafe");
+        System.out.printf("| %-10s %-25s\t\t|\n", "T", "Get Total");
+        System.out.printf("| %-10s %-25s\t\t|\n", "E", "End of order and Bill");
+        System.out.printf("| %-10s %-25s\t\t|\n", "Q", "Quit from Suparuay cafe");
         System.out.println("---------------------------------------------");
 
         System.out.println();
         enter = checkInput(1, 2);
 
-        if (isExit(enter)) {
-            exit = "e";
+        if (isExit(enter) || isBill(enter)) {
+            exit = "x";
             System.out.println("Exit");
+            return;
+        } else if (isTotal(enter)) {
+            getTotalOrder();
             return;
         }
 
@@ -52,20 +62,22 @@ public class App {
                 orderCoffee();
                 break;
             case 2:
-                orderTea();
-                break;
-            case 3:
                 orderDessert();
                 break;
             default:
                 break;
         }
 
+    }
 
+
+    public static void getTotalOrder() {
+        orders.showTotal();
     }
 
     public static void orderCoffee() {
 
+        System.out.println("\n[Coffee]");
         System.out.println("-----------------------------------------------------");
         System.out.printf("|\t\t%s\t\t\t|\n", "Enter the command of Coffee Drink.");
         System.out.printf("| %-12s %-25s %8s\t|\n", "Command", "Coffee", "Price");
@@ -74,14 +86,21 @@ public class App {
         System.out.printf("| %-10s %-25s %8s\t\t|\n", "3", "Latte", "90");
         System.out.printf("| %-10s %-25s %8s\t\t|\n", "4", "Mocha", "105");
         System.out.printf("| %-10s %-25s %8s\t\t|\n", "5", "Caramel Macchiato", "120");
-        System.out.printf("| %-10s %-25s %8s\t\t|\n", "B", "Get Bill", " ");
-        System.out.printf("| %-10s %-25s %8s\t\t|\n", "Q", "Exit from Suparuay cafe", " ");
+        System.out.printf("| %-10s %-25s %8s\t\t|\n", "Q", "Back to Main Menu", " ");
+        System.out.printf("| %-10s %-25s %8s\t\t|\n", "T", "Get Total", " ");
+        System.out.printf("| %-10s %-25s %8s\t\t|\n", "E", "End of order and Bill", " ");
         System.out.println("-----------------------------------------------------");
 
 
         enter = checkInput(1, 5);
 
         if(isExit(enter)){
+            return;
+        }else if (isBill(enter)) {
+            enter = "x";
+            return;
+        }else if (isTotal(enter)) {
+            getTotalOrder();
             return;
         }
 
@@ -91,19 +110,16 @@ public class App {
             case 1:
                 Coffee coffee1 = new Americano();
                 orders.addOrder(coffee1);
-                System.out.println(orders.getName());
                 break;
             case 2:
                 Coffee coffee2 = new Cappucino();
                 addTopping(coffee2);
                 orders.addOrder(coffee2);
-                System.out.println(orders.getName());
                 break;
             case 3:
                 Coffee coffee3 = new Latte();
                 addTopping(coffee3);
                 orders.addOrder(coffee3);
-                System.out.println(orders.getName());
                 break;
             case 4:
                 Coffee coffee4 = new Mocha();
@@ -122,15 +138,20 @@ public class App {
     }
 
     public static void orderDessert() {
-        System.out.println("Enter the number.");
-        System.out.println(">> Status");
+        System.out.println("\n[Status]");
         dailyDessert();
-        System.out.println("\nB Ask for the bill");
-        System.out.println("Q Back to main menu\n");
 
         enter = checkAvailableDessert();
 
-        if(isExit(enter)) return;
+        if(isExit(enter)){
+            return;
+        }else if (isBill(enter)) {
+            enter = "x";
+            return;
+        }else if (isTotal(enter)) {
+            getTotalOrder();
+            return;
+        }
 
         int index = Integer.parseInt(enter);
         Dessert dessert = dailyDessert().get(index-1);
@@ -141,18 +162,20 @@ public class App {
     public static List<Dessert> dailyDessert() {
         List<Dessert> desserts = new ArrayList<Dessert>();
         int count = 1;
+        System.out.println("\n[Dessert]");
         System.out.println("-----------------------------------------------------");
-        System.out.printf("|\t\t%s\t\t\t|\n", "Enter the command of Coffee Drink.");
+        System.out.printf("|\t\t%s\t\t\t\t|\n", "Enter the command of Desserts.");
         System.out.printf("| %-12s %-25s %8s\t|\n", "Command", "Dessert", "Price");
 
         for (String type: types) {
             Dessert dessert = DessertFactory.createDesserts(type);
-            System.out.printf("| %-12d %-25s %8.0f\n", count, dessert.getName(), dessert.getPrice());
+            System.out.printf("| %-12d %-25s %8.0f\t|\n", count, dessert.getName(), dessert.getPrice());
             desserts.add(dessert);
             count++;
         }
-        System.out.printf("| %-10s %-25s %8s\t\t|\n", "B", "Get Bill", " ");
-        System.out.printf("| %-10s %-25s %8s\t\t|\n", "Q", "Exit from Suparuay cafe", " ");
+        System.out.printf("| %-12s %-25s %8s\t|\n", "Q", "Back to Main Menu", " ");
+        System.out.printf("| %-12s %-25s %8s\t|\n", "T", "Get Total", " ");
+        System.out.printf("| %-12s %-25s %8s\t|\n", "E", "End of order and Bill", " ");
         System.out.println("-----------------------------------------------------");
 
         return desserts;
@@ -160,18 +183,28 @@ public class App {
 
     public static void addTopping(Coffee coffee) {
         Coffee c = coffee;
-        System.out.println("\nAdd toppings?");
+
+        System.out.println("\n[Topping]");
+        System.out.println("\t\tAdd toppings?");
         System.out.println("YES, ..");
-        System.out.println("1 Chocolate Ship");
-        System.out.println("2 Coffee Jelly");
-        System.out.println("3 Whip Cream\n");
+        System.out.printf("\t  1 %-20s %-8s\n", "Chocolate Chip", "35");
+        System.out.printf("\t  2 %-20s %-8s\n", "Coffee Jelly", "10");
+        System.out.printf("\t  3 %-20s %-8s\n", "Whip Cream", "25");
         System.out.println("NO, ..");
-        System.out.println("B Ask for the bill");
-        System.out.println("Q Back to main menu");
+        System.out.println("\t  Q Back to main menu");
+        System.out.println("\t  T Get Total");
+        System.out.println("\t  B End of order and Bill");
 
 
         enter = checkInput(1, 3);
-        if(isExit(enter)) {
+
+        if(isExit(enter)){
+            return;
+        }else if (isBill(enter)) {
+            enter = "x";
+            return;
+        }else if (isTotal(enter)) {
+            getTotalOrder();
             return;
         }
         int toppingCommand = Integer.parseInt(enter);
@@ -190,49 +223,41 @@ public class App {
                 break;
         }
 
-
     }
 
-    public static void addAnotherMenu() {
-        System.out.println("\nAdd another order?");
-        System.out.println("YES, ..");
-        System.out.println("1 Coffee menu");
-        System.out.println("NO, ..");
-        System.out.println("B Ask for the bill");
-        System.out.println("Q Back to another menu\n");
 
-        enter = checkInput(1, 1);
-
-        if(isExit(enter)){
-            return;
-        }
-
-        orderCoffee();
-
-
-    }
 
     public static void bill() {
+        System.out.println("\n\n[End of Order]");
+        orders.showTotal();
         System.out.println();
-        System.out.println("-------------------------------");
-        System.out.println(orders.getName());
-        System.out.println(orders.getTotal());
+        System.out.println("Total Order: " + orders.getSize());
+        System.out.println("\tDessert Order: " + orders.getCountDessert());
+        System.out.println("\tCoffee Order: " + orders.getCountCoffee());
+        System.out.println();
+        if(orders.getCountCoffee() > 0){
+            toBarista();
+        }
 
     }
 
     public static void toBarista() {
-        System.out.println("----------To Barista-----------");
+        System.out.println("-------------------To Barista-------------------");
         orders.prepareOrderCoffee();
-        System.out.println("-------------------------------");
-    }
-
-    public static void orderTea() {
-
+        System.out.println("------------------------------------------------");
     }
 
 
     public static boolean isExit(String e) {
-        return e.matches("[qQbB]");
+        return e.matches("[qQ]");
+    }
+
+    public static boolean isBill(String e) {
+        return e.matches("[eE]");
+    }
+
+    public static boolean isTotal(String e) {
+        return e.matches("[tT]");
     }
 
     public static String checkAvailableDessert() {
@@ -263,10 +288,11 @@ public class App {
                     break;
                 }
                 else System.out.println("Sorry, there is no menu for this number.");
-            } else if(enter.matches("[qQbB]")){
-
+            } else if(enter.matches("[qQeE]")){
                 commandResult = enter;
                 break;
+            }else if(enter.matches("[tT]")){
+                return "t";
             }
             else {
                 System.out.println("Invalid command.");
