@@ -5,12 +5,27 @@ import java.util.List;
 
 public class OrderList implements Order{
 
-    private List<Order> orders = new ArrayList<Order>();
+    private List<Order> orders;
+
+    public OrderList() {
+        orders = new ArrayList<Order>();
+    }
 
     private int countCoffee = 0, countDessert = 0;
 
     public void addOrder(Order o) {
-        orders.add(o);
+        if(o instanceof Dessert){
+            if(o.getPrice() != 0){
+                orders.add(o);
+                return;
+            }else {
+                System.out.println("Not available order.\n");
+            }
+        }else if(o != null){
+            orders.add(o);
+        }else {
+            System.out.println("Not available order.\n");
+        }
     }
 
     public void removeOrder(Order o) {
@@ -36,6 +51,7 @@ public class OrderList implements Order{
     public String getOrder() {
         StringBuilder str = new StringBuilder();
         int count = 1;
+        str.append("\n");
         for(Order o: orders) {
             str.append(count + ".)");
             str.append(o.getName() + "\t" + o.getPrice() + " Baht\n");
@@ -55,7 +71,6 @@ public class OrderList implements Order{
         System.out.printf("| %-12s| %-25s| %-8s |\t\n", "No.", "Order", "Price");
         for(Order o: orders) {
             if(o instanceof Coffee){
-
                 countCoffee++;
 
             }else if(o instanceof Dessert) {
@@ -72,6 +87,10 @@ public class OrderList implements Order{
 
     public List<Order> getOrderList() {
         return orders;
+    }
+
+    public void clearList() {
+        orders.clear();
     }
 
     public void prepareOrderCoffee() {

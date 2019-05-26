@@ -193,7 +193,7 @@ public class App {
         System.out.println("NO, ..");
         System.out.println("\t  Q Back to main menu");
         System.out.println("\t  T Get Total");
-        System.out.println("\t  B End of order and Bill");
+        System.out.println("\t  E End of order and Bill");
 
 
         enter = checkInput(1, 3);
