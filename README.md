@@ -25,9 +25,9 @@ Supalruay-Cafe is a simple simulation program of coffee shops that uses 3 main d
   Composite pattern is a partitioning design pattern and describes a group of objects that are treated the same way as a single instance of the same type of object. The Composite Pattern has three participants. Component, Leaf, and Composite.
   
   In the program,
-        - Order class is a Component class that declares the interface for objects in the composition and for accessing and managing its child components.
-        - Coffee and Dessert class are a Leaf class that defines behavior for primitive objects in the composition. It represents leaf objects in the composition.
-        - OrderList class is a Composite class that stores child components and implements child related operations in the component interface.
+    - Order class is a Component class that declares the interface for objects in the composition and for accessing and managing its child components.
+    - Coffee and Dessert class are a Leaf class that defines behavior for primitive objects in the composition. It represents leaf objects in the composition.
+    - OrderList class is a Composite class that stores child components and implements child related operations in the component interface.
  
 <img width="174" alt="Screen Shot 2562-05-26 at 18 57 54" src="https://user-images.githubusercontent.com/32286346/58381545-4d727e00-7fe8-11e9-829b-891d77fb382b.png">
 
